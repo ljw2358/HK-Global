@@ -1,753 +1,690 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PHK Global</title>
-  <meta name="description" content="PHK Global — Global expansion platform for PHK: capital partnerships, market entry, localization, compliance, and ecosystem scaling." />
-  <meta name="theme-color" content="#0b1220" />
+  <meta name="description" content="PHK Global - Global expansion, strategic partnerships, market entry, localization, compliance." />
 
   <style>
     :root{
-      --bg:#0b1220;
-      --card:#101a32;
-      --text:#eaf0ff;
-      --muted:#b8c3e6;
-      --line:rgba(255,255,255,.12);
-      --accent:#7cf7c2;
-      --accent2:#76a8ff;
-      --warn:#ffd36a;
-      --shadow: 0 20px 60px rgba(0,0,0,.35);
-      --radius:18px;
-      --max:1120px;
+      --bg1:#07121c;
+      --bg2:#0b1b2a;
+      --card: rgba(255,255,255,0.06);
+      --card2: rgba(255,255,255,0.04);
+      --line: rgba(255,255,255,0.12);
+      --text: rgba(255,255,255,0.93);
+      --muted: rgba(255,255,255,0.72);
+      --soft: rgba(255,255,255,0.56);
+      --accent:#41e0b7;
+      --accent2:#2bbca0;
+      --shadow: 0 18px 55px rgba(0,0,0,0.45);
+      --radius: 22px;
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
+
+    *{ box-sizing:border-box; }
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple SD Gothic Neo", "Noto Sans KR", "Noto Sans Arabic", sans-serif;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,"Noto Sans KR",sans-serif;
       color:var(--text);
       background:
-        radial-gradient(1200px 600px at 15% 0%, rgba(118,168,255,.18), transparent 60%),
-        radial-gradient(1000px 500px at 85% 10%, rgba(124,247,194,.16), transparent 55%),
-        radial-gradient(900px 700px at 50% 110%, rgba(255,211,106,.10), transparent 55%),
-        var(--bg);
-      line-height:1.55;
+        radial-gradient(1200px 650px at 18% 12%, rgba(65,224,183,0.18), transparent 60%),
+        radial-gradient(1000px 560px at 82% 18%, rgba(80,140,255,0.14), transparent 58%),
+        radial-gradient(900px 520px at 40% 90%, rgba(255,255,255,0.06), transparent 55%),
+        linear-gradient(180deg, var(--bg2), var(--bg1));
+      min-height:100vh;
       overflow-x:hidden;
     }
-    a{color:inherit; text-decoration:none}
-    .wrap{max-width:var(--max); margin:0 auto; padding:26px 18px 56px}
-
-    header{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:14px; padding:14px 14px;
-      border:1px solid var(--line);
-      border-radius: var(--radius);
-      background: linear-gradient(180deg, rgba(16,26,50,.82), rgba(16,26,50,.55));
-      backdrop-filter: blur(10px);
-      box-shadow: var(--shadow);
-      position:sticky;
-      top:14px;
-      z-index:10;
-    }
-    .brand{display:flex; align-items:center; gap:12px; min-width: 260px}
-    .logo{
-      width:42px; height:42px; border-radius:14px;
-      background:
-        radial-gradient(circle at 30% 30%, rgba(124,247,194,.9), rgba(124,247,194,.05) 55%),
-        radial-gradient(circle at 70% 70%, rgba(118,168,255,.85), rgba(118,168,255,.05) 60%),
-        rgba(255,255,255,.05);
-      border:1px solid rgba(255,255,255,.14);
-      box-shadow: 0 12px 30px rgba(0,0,0,.35);
-      display:grid; place-items:center;
-      position:relative; overflow:hidden;
-      flex:0 0 auto;
-    }
-    .logo:after{
-      content:"";
-      position:absolute; inset:-60%;
-      background: conic-gradient(from 180deg, rgba(124,247,194,.0), rgba(124,247,194,.35), rgba(118,168,255,.35), rgba(255,211,106,.25), rgba(124,247,194,.0));
-      animation: spin 10s linear infinite;
-    }
-    @keyframes spin{to{transform:rotate(360deg)}}
-    .logo span{
-      position:relative; z-index:1;
-      font-weight:900; letter-spacing:.5px; font-size:14px;
-      color: rgba(10,18,32,.95);
-      background: rgba(234,240,255,.92);
-      padding:2px 8px; border-radius:10px;
-    }
-    .brand h1{margin:0; font-size:16px; letter-spacing:.2px}
-    .brand p{margin:0; font-size:12px; color:var(--muted)}
-
-    .rightTop{display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:flex-end}
-    .langBar{display:flex; align-items:center; gap:8px; flex-wrap:wrap}
-    .langLabel{
-      font-size:12px;
-      color: var(--muted);
-      padding:6px 10px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.04);
-    }
-    .langBtn{
-      display:inline-flex; align-items:center; justify-content:center;
-      padding:8px 10px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.05);
-      color: var(--text);
-      font-size:12px;
-      cursor:pointer;
-      transition: transform .15s ease, background .2s ease, border-color .2s ease;
-      user-select:none;
-      min-width:44px;
-      text-transform:uppercase;
-    }
-    .langBtn:hover{transform: translateY(-1px); background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.2)}
-    .langBtn.active{
-      background: linear-gradient(90deg, rgba(124,247,194,.18), rgba(118,168,255,.18));
-      border-color: rgba(124,247,194,.30);
-      box-shadow: 0 10px 28px rgba(0,0,0,.25);
-    }
-    .chip{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:8px 10px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.16);
-      background: rgba(255,255,255,.05);
-      color: var(--muted);
-      font-size:12px;
-      white-space:nowrap;
-    }
-    .chip b{color: var(--text)}
-    .dot{width:8px;height:8px;border-radius:50%; background: var(--accent); box-shadow: 0 0 18px rgba(124,247,194,.55)}
-
-    .hero{
-      margin-top:18px;
-      padding:26px 18px 18px;
-      border:1px solid var(--line);
-      border-radius: var(--radius);
-      background: linear-gradient(180deg, rgba(16,26,50,.78), rgba(16,26,50,.40));
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      position:relative;
-    }
-    .hero:before{
-      content:"";
-      position:absolute; inset:-2px;
-      background:
-        radial-gradient(900px 220px at 20% 0%, rgba(124,247,194,.18), transparent 60%),
-        radial-gradient(780px 220px at 80% 0%, rgba(118,168,255,.18), transparent 60%);
-      pointer-events:none;
-    }
-    .heroGrid{
-      position:relative;
-      display:grid;
-      grid-template-columns: 1.08fr .92fr;
-      gap:16px;
-      align-items:stretch;
-    }
-    @media (max-width: 900px){ .heroGrid{grid-template-columns:1fr} }
-
-    .kicker{
-      display:inline-flex; gap:8px; align-items:center;
-      color: var(--muted); font-size:12px; letter-spacing:.25px;
-      background: rgba(255,255,255,.05);
-      border:1px solid var(--line);
-      padding:8px 12px;
-      border-radius:999px;
-      width:fit-content;
-    }
-    .hero h2{
-      margin:14px 0 10px;
-      font-size:36px;
-      line-height:1.1;
-      letter-spacing:-.5px;
-    }
-    .hero h2 .grad{
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      -webkit-background-clip:text; background-clip:text; color:transparent;
-    }
-    .hero p{margin:0 0 16px; color: var(--muted); font-size:14px; max-width: 72ch}
-
-    .ctaRow{display:flex; gap:10px; flex-wrap:wrap; margin-top: 6px}
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center; gap:10px;
-      padding:11px 14px;
-      border-radius: 14px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.06);
-      font-weight:800;
-      font-size:13px;
-      cursor:pointer;
-      transition: transform .15s ease, background .2s ease, border-color .2s ease;
-      min-width: 170px;
-    }
-    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.22)}
-    .btn.primary{
-      background: linear-gradient(90deg, rgba(124,247,194,.18), rgba(118,168,255,.18));
-      border-color: rgba(124,247,194,.22);
-    }
-    .btn.primary:hover{border-color: rgba(124,247,194,.35)}
-    .btn.ghost{
-      background: rgba(0,0,0,.18);
-      border-color: rgba(255,255,255,.14);
+    a{ color:inherit; text-decoration:none; }
+    .wrap{
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 28px 18px 86px;
     }
 
-    section{margin-top:18px}
-    .sectionHead{
-      display:flex; align-items:flex-end; justify-content:space-between; gap:12px;
-      margin:0 0 10px;
-      padding:0 6px;
-    }
-    .sectionHead h3{margin:0; font-size:16px}
-    .sectionHead p{margin:0; color: var(--muted); font-size:12px}
-
-    .grid3{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:12px;
-    }
-    @media (max-width: 900px){ .grid3{grid-template-columns:1fr} }
-
-    .box{
-      border:1px solid var(--line);
-      border-radius: var(--radius);
-      background: rgba(255,255,255,.04);
-      padding:16px;
-      box-shadow: 0 14px 38px rgba(0,0,0,.22);
-    }
-    .tag{
-      display:inline-flex;
-      padding:6px 10px;
-      border-radius:999px;
-      background: rgba(124,247,194,.10);
-      border:1px solid rgba(124,247,194,.18);
-      color: var(--text);
-      font-size:12px;
-      margin-bottom:10px;
-      width:fit-content;
-    }
-    .box h4{margin:0 0 8px; font-size:14px}
-    .box p{margin:0; color: var(--muted); font-size:13px}
-
-    .cols{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:12px;
-    }
-    @media (max-width: 900px){ .cols{grid-template-columns:1fr} }
-
-    .list{
-      margin:0; padding:0; list-style:none;
-      display:grid; gap:10px;
-    }
-    .item{
-      border:1px solid var(--line);
-      border-radius: var(--radius);
-      background: rgba(255,255,255,.035);
-      padding:14px;
-    }
-    .item b{display:block; margin-bottom:6px; font-size:13px}
-    .item small{color: var(--muted); font-size:12px}
-
-    .footer{
-      margin-top:22px;
-      border:1px solid var(--line);
-      border-radius: var(--radius);
-      background: rgba(255,255,255,.04);
-      padding:16px;
+    /* --- HERO CARD --- */
+    .heroTop{
+      padding-top: 78px;
       display:flex;
       align-items:center;
-      justify-content:space-between;
-      gap:14px;
-      flex-wrap:wrap;
+      gap:18px;
     }
-    .muted{color:var(--muted)}
+    .logo{
+      width: 62px; height: 62px;
+      border-radius: 18px;
+      display:grid;
+      place-items:center;
+      background:
+        radial-gradient(20px 20px at 30% 30%, rgba(255,255,255,0.75), rgba(255,255,255,0.0)),
+        linear-gradient(135deg, rgba(65,224,183,0.35), rgba(80,140,255,0.18));
+      border: 1px solid rgba(255,255,255,0.20);
+      box-shadow: 0 18px 50px rgba(0,0,0,0.45);
+      position: relative;
+      overflow:hidden;
+    }
+    .logo::after{
+      content:"";
+      position:absolute;
+      inset:-30%;
+      background: radial-gradient(circle at 40% 30%, rgba(65,224,183,0.30), transparent 55%);
+      filter: blur(12px);
+      opacity: .9;
+    }
+    .logo span{
+      position:relative;
+      z-index:2;
+      font-weight: 1000;
+      letter-spacing: .8px;
+      color: rgba(255,255,255,0.92);
+      font-size: 22px;
+    }
+
+    .heroTitleBox{
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(10,18,28,0.55);
+      backdrop-filter: blur(14px);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px 22px;
+      width: min(860px, 100%);
+    }
+
+    .heroTitle{
+      margin:0;
+      font-weight: 1000;
+      letter-spacing: -0.3px;
+      font-size: clamp(20px, 3vw, 28px);
+    }
+    .heroSub{
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    /* --- MAIN SECTION --- */
     .pill{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:9px 12px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.05);
-      color: var(--text);
-      font-size:12px;
-      cursor:pointer;
-      transition: transform .15s ease, background .2s ease, border-color .2s ease;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px 16px;
+      border: 1px solid rgba(65,224,183,0.28);
+      background: rgba(65,224,183,0.10);
+      color: #dffcf4;
+      border-radius: 999px;
+      font-weight: 900;
+      letter-spacing: 0.2px;
+      margin-top: 22px;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.28);
+    }
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      background: rgba(65,224,183,0.95);
+      box-shadow: 0 0 18px rgba(65,224,183,0.55);
+    }
+
+    .bigTitle{
+      margin: 18px 0 10px;
+      font-size: clamp(38px, 5vw, 62px);
+      line-height: 1.06;
+      letter-spacing: -0.8px;
+      font-weight: 1000;
+    }
+    .bigTitle .accent{
+      color: var(--accent);
+      text-shadow: 0 0 22px rgba(65,224,183,0.22);
+    }
+
+    .desc{
+      margin: 14px 0 0;
+      max-width: 860px;
+      font-size: 18px;
+      line-height: 1.72;
+      color: var(--muted);
+    }
+
+    .grid{
+      margin-top: 26px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 880px){
+      .grid{ grid-template-columns: 1fr; }
+      .heroTop{ padding-top: 70px; }
+    }
+
+    .card{
+      border: 1px solid rgba(255,255,255,0.12);
+      background: linear-gradient(180deg, var(--card), var(--card2));
+      border-radius: var(--radius);
+      padding: 18px 18px 16px;
+      box-shadow: var(--shadow);
+    }
+    .card h3{
+      margin: 0 0 10px;
+      font-size: 18px;
+      letter-spacing: -0.2px;
+      color: #bffef0;
+      font-weight: 1000;
+    }
+    .card ul{
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+    .card li{ margin: 8px 0; }
+
+    .tagRow{
+      display:flex;
+      gap:10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+    .tag{
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.05);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-weight: 900;
+      color: rgba(255,255,255,0.86);
+      font-size: 13px;
       user-select:none;
     }
-    .pill:hover{transform: translateY(-1px); background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.2)}
 
-    .toast{
-      position: fixed;
-      left: 50%;
-      bottom: 18px;
-      transform: translateX(-50%);
-      background: rgba(16,26,50,.92);
-      border:1px solid rgba(255,255,255,.18);
-      color: var(--text);
-      padding: 10px 12px;
+    .btnRow{
+      margin-top: 18px;
+      display:flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .btn{
+      border: 1px solid rgba(65,224,183,0.30);
+      background: rgba(65,224,183,0.12);
+      color: #dffcf4;
+      padding: 12px 16px;
       border-radius: 14px;
-      box-shadow: var(--shadow);
-      display:none;
-      gap:10px;
-      align-items:center;
-      z-index: 50;
-      max-width: calc(100% - 24px);
+      font-weight: 1000;
+      cursor:pointer;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.25);
+      transition: transform .08s ease, background .2s ease, border-color .2s ease;
     }
-    .toast.show{display:flex}
-    .toast .bar{
-      width:8px;height:8px;border-radius:50%;
-      background: var(--accent);
-      box-shadow: 0 0 18px rgba(124,247,194,.55);
+    .btn:hover{ background: rgba(65,224,183,0.16); border-color: rgba(65,224,183,0.45); }
+    .btn:active{ transform: scale(0.99); }
+    .btn.secondary{
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.88);
+    }
+    .btn.secondary:hover{
+      background: rgba(255,255,255,0.10);
+      border-color: rgba(255,255,255,0.22);
     }
 
-    /* RTL tweaks */
-    html[dir="rtl"] .brand{flex-direction:row-reverse}
-    html[dir="rtl"] .brand > div{text-align:right}
-    html[dir="rtl"] .heroGrid{direction:rtl}
-    html[dir="rtl"] .heroGrid > div{direction:rtl}
-    html[dir="rtl"] .sectionHead{flex-direction:row-reverse}
-    html[dir="rtl"] .footer{flex-direction:row-reverse}
+    footer{
+      margin-top: 28px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,0.10);
+      color: var(--soft);
+      font-size: 14px;
+      display:flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .contact{ color: rgba(255,255,255,0.84); font-weight: 900; }
+
+    /* === Language blocks === */
+    .lang{ display:none; }
+    .lang.show{ display:block; }
+
+    /* === RTL === */
+    body.rtl{ direction: rtl; text-align: right; }
+    body.rtl .card ul{ padding-right: 18px; padding-left: 0; }
+    body.rtl footer{ flex-direction: row-reverse; }
+
+    /* === PHK Neon Glass Language Switch (Kkassam Mode) === */
+    .langDock{
+      position: fixed;
+      top: 120px;
+      right: 14px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .langFab{
+      width: 62px;
+      height: 62px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(12,20,30,0.55);
+      backdrop-filter: blur(14px);
+      box-shadow:
+        0 20px 55px rgba(0,0,0,0.45),
+        inset 0 0 0 1px rgba(255,255,255,0.06);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      user-select: none;
+      transition: transform .14s ease, border-color .2s ease, background .2s ease;
+    }
+    .langFab:hover{
+      transform: translateY(-2px);
+      border-color: rgba(65,224,183,0.45);
+      background: rgba(12,20,30,0.70);
+    }
+
+    .langFabDot{
+      width: 12px; height: 12px;
+      border-radius: 999px;
+      background: rgba(65,224,183,0.95);
+      box-shadow: 0 0 18px rgba(65,224,183,0.55);
+    }
+
+    .langPanel{
+      width: 190px;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(8,14,22,0.50);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.55);
+      overflow: hidden;
+
+      transform: translateX(210px);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform .22s ease, opacity .22s ease;
+    }
+    .langPanel.open{
+      transform: translateX(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .langPanelHead{
+      padding: 12px 14px;
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+    }
+    .langPanelHead .t{
+      display:flex; gap:10px; align-items:center;
+      font-weight: 1000;
+      letter-spacing: .2px;
+      color: rgba(255,255,255,0.88);
+    }
+    .langBadge{
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(65,224,183,0.28);
+      background: rgba(65,224,183,0.10);
+      color: rgba(223,252,244,0.95);
+      font-weight: 1000;
+      font-size: 12px;
+    }
+
+    .langList{
+      padding: 12px;
+      display:flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .langChip{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      padding: 12px 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.05);
+      color: rgba(255,255,255,0.90);
+      font-weight: 1000;
+      cursor:pointer;
+      transition: transform .12s ease, border-color .2s ease, background .2s ease;
+    }
+    .langChip:hover{
+      transform: translateY(-1px);
+      border-color: rgba(65,224,183,0.45);
+      background: rgba(65,224,183,0.10);
+    }
+    .langChip small{
+      font-weight: 900;
+      color: rgba(255,255,255,0.62);
+    }
+    .langChip.active{
+      border-color: rgba(65,224,183,0.60);
+      background: linear-gradient(90deg, rgba(65,224,183,0.18), rgba(80,140,255,0.10));
+      box-shadow: 0 0 0 1px rgba(65,224,183,0.18), 0 18px 40px rgba(0,0,0,0.35);
+    }
+
+    @media (max-width: 520px){
+      .langDock{ top: 92px; right: 10px; }
+    }
+
+    /* RTL + dock */
+    body.rtl .langDock{ left: 14px; right: auto; }
+    body.rtl .langPanel{ transform: translateX(-210px); }
+    body.rtl .langPanel.open{ transform: translateX(0); }
+
   </style>
 </head>
 
 <body>
-  <div class="wrap">
-    <header>
-      <div class="brand" aria-label="PHK Global">
-        <div class="logo" aria-hidden="true"><span>PHK</span></div>
-        <div>
-          <h1 id="t_brand">PHK Global</h1>
-          <p id="t_tagline">Global Expansion & Strategic Partnerships</p>
+
+  <!-- Neon Language Dock -->
+  <div class="langDock">
+    <div class="langFab" id="langFab" title="Language">
+      <div class="langFabDot"></div>
+    </div>
+
+    <div class="langPanel" id="langPanel">
+      <div class="langPanelHead">
+        <div class="t">
+          <span class="langFabDot" style="width:10px;height:10px;"></span>
+          <span>LANG</span>
         </div>
+        <span class="langBadge" id="langNow">KR</span>
       </div>
 
-      <div class="rightTop">
-        <span class="chip"><span class="dot"></span> <span id="t_status"><b>LANG</b>: EN</span></span>
-        <div class="langBar" aria-label="Language">
-          <span class="langLabel" id="t_langLabel">Language</span>
-          <button class="langBtn" data-lang="en" type="button">EN</button>
-          <button class="langBtn" data-lang="ko" type="button">KR</button>
-          <button class="langBtn" data-lang="ar" type="button">AR</button>
+      <div class="langList">
+        <div class="langChip" data-lang="kr">
+          <div>KR <small>한국어</small></div><div>→</div>
         </div>
-      </div>
-    </header>
-
-    <div class="hero" id="top">
-      <div class="heroGrid">
-        <div>
-          <div class="kicker">
-            <span class="dot"></span>
-            <span id="t_kicker">Capital • Market Entry • Localization • Compliance</span>
-          </div>
-
-          <h2 id="t_heroTitle">
-            Scale PHK to <span class="grad">global markets</span> with speed and trust.
-          </h2>
-
-          <p id="t_heroDesc">
-            PHK Global is the expansion platform for PHK ecosystem — building strategic partnerships, market entry programs,
-            localization, and compliance to accelerate adoption across regions.
-          </p>
-
-          <div class="ctaRow">
-            <a class="btn primary" href="#pillars" id="t_cta1">Our Pillars</a>
-            <a class="btn" href="#programs" id="t_cta2">Programs</a>
-            <a class="btn ghost" href="#contact" id="t_cta3">Contact</a>
-          </div>
-
-          <div class="box" style="margin-top:14px">
-            <div class="tag" id="t_focusTag">Global Focus</div>
-            <p id="t_focusDesc" class="muted" style="margin:0">
-              Robotics • Fusion Energy • Space Industry • Financial Infrastructure — one global operating frame.
-            </p>
-          </div>
+        <div class="langChip" data-lang="en">
+          <div>EN <small>English</small></div><div>→</div>
         </div>
-
-        <div class="box">
-          <h4 id="t_rightTitle" style="margin:0 0 10px">What PHK Global does</h4>
-          <ul class="list" style="gap:10px">
-            <li class="item"><b id="t_r1">Partner & capital matchmaking</b><small id="t_r1d">Investors, sovereign partners, strategic corporates, and ecosystem builders.</small></li>
-            <li class="item"><b id="t_r2">Market entry playbooks</b><small id="t_r2d">Pilot programs, regulatory paths, and go-to-market execution.</small></li>
-            <li class="item"><b id="t_r3">Localization & operating support</b><small id="t_r3d">Language, pricing, legal, logistics, and regional operations.</small></li>
-            <li class="item"><b id="t_r4">Compliance & risk layer</b><small id="t_r4d">KYC/AML-ready finance alignment and vendor governance frameworks.</small></li>
-          </ul>
+        <div class="langChip" data-lang="ar">
+          <div>AR <small>العربية</small></div><div>→</div>
         </div>
       </div>
     </div>
-
-    <section id="pillars">
-      <div class="sectionHead">
-        <h3 id="t_pillarsTitle">4 Global Pillars</h3>
-        <p id="t_pillarsSub">A unified expansion operating system</p>
-      </div>
-
-      <div class="grid3">
-        <div class="box">
-          <div class="tag" id="t_p1tag">Partnership</div>
-          <h4 id="t_p1t">Strategic Alliances</h4>
-          <p id="t_p1d">Sovereign funds, corporates, universities, and ecosystem partners — structured for long-term outcomes.</p>
-        </div>
-        <div class="box">
-          <div class="tag" id="t_p2tag">Market Entry</div>
-          <h4 id="t_p2t">Pilot → Scale</h4>
-          <p id="t_p2d">Fast pilots, measurable KPIs, and scalable rollouts across regions with repeatable playbooks.</p>
-        </div>
-        <div class="box">
-          <div class="tag" id="t_p3tag">Localization</div>
-          <h4 id="t_p3t">Regional Operating Support</h4>
-          <p id="t_p3d">Localization of product, pricing, service, and supply chains to fit each market reality.</p>
-        </div>
-      </div>
-
-      <div class="grid3" style="margin-top:12px">
-        <div class="box">
-          <div class="tag" id="t_p4tag">Compliance</div>
-          <h4 id="t_p4t">Governance & Risk</h4>
-          <p id="t_p4d">Compliance-ready frameworks (KYC/AML alignment), vendor governance, and risk mitigation for global trust.</p>
-        </div>
-        <div class="box">
-          <div class="tag" id="t_p5tag">Ecosystem</div>
-          <h4 id="t_p5t">Ecosystem Scaling</h4>
-          <p id="t_p5d">Developers, suppliers, distribution, and community — turning pilots into durable ecosystems.</p>
-        </div>
-        <div class="box">
-          <div class="tag" id="t_p6tag">Capital</div>
-          <h4 id="t_p6t">Capital Structure</h4>
-          <p id="t_p6d">Funding paths, JV structuring, and investment memos to align global partners with PHK growth.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="programs">
-      <div class="sectionHead">
-        <h3 id="t_progTitle">Programs</h3>
-        <p id="t_progSub">Clear entry points for partners and investors</p>
-      </div>
-
-      <div class="cols">
-        <div class="box">
-          <h4 id="t_progA">Partner Onboarding</h4>
-          <ul class="list">
-            <li class="item"><b id="t_pa1">Country/Region Partner</b><small id="t_pa1d">Local operating partner for pilots, compliance, and scaling.</small></li>
-            <li class="item"><b id="t_pa2">Industry Partner</b><small id="t_pa2d">Robotics, energy, space, finance — joint go-to-market programs.</small></li>
-            <li class="item"><b id="t_pa3">Supply & Distribution</b><small id="t_pa3d">Parts, manufacturing, logistics, and distribution hubs.</small></li>
-          </ul>
-        </div>
-        <div class="box">
-          <h4 id="t_progB">Investor Path</h4>
-          <ul class="list">
-            <li class="item"><b id="t_pb1">Strategic Equity</b><small id="t_pb1d">Long-term alignment with PHK ecosystem value creation.</small></li>
-            <li class="item"><b id="t_pb2">Project Financing</b><small id="t_pb2d">Country pilots, facilities, and scaling programs with measurable KPIs.</small></li>
-            <li class="item"><b id="t_pb3">JV / SPV</b><small id="t_pb3d">Regional joint ventures with local compliance and governance.</small></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- ✅ 연락처는 맨 아래 -->
-    <section id="contact">
-      <div class="footer">
-        <div>
-          <div style="font-weight:900; letter-spacing:.2px" id="t_contactTitle">Contact</div>
-          <div class="muted" style="font-size:13px; margin-top:6px">
-            <span id="t_emailLabel">Email</span>:
-            <a href="mailto:info@phkglobal.com" id="emailLink" style="text-decoration:underline">info@phkglobal.com</a>
-          </div>
-          <div class="muted" style="font-size:12px; margin-top:6px" id="t_footerNote">
-            PHK Global — expansion platform for partnerships, localization, and global scaling.
-          </div>
-        </div>
-
-        <div style="display:flex; gap:10px; flex-wrap:wrap">
-          <button class="pill" type="button" id="copyEmailBtn">📩 <span id="t_copyEmail">Copy Email</span></button>
-          <a class="pill" href="#top">⬆️ <span id="t_backTop">Back to top</span></a>
-        </div>
-      </div>
-    </section>
   </div>
 
-  <div class="toast" id="toast" role="status" aria-live="polite">
-    <div class="bar" aria-hidden="true"></div>
-    <div id="toastMsg" style="font-size:12px"></div>
+  <div class="wrap">
+    <!-- Top mini card -->
+    <div class="heroTop">
+      <div class="logo"><span>PHK</span></div>
+
+      <div class="heroTitleBox">
+        <h1 class="heroTitle">PHK Global</h1>
+
+        <p class="heroSub lang show" id="sub-kr">글로벌 확장·전략 파트너십</p>
+        <p class="heroSub lang" id="sub-en">Global Expansion · Strategic Partnerships</p>
+        <p class="heroSub lang" id="sub-ar">التوسع العالمي · الشراكات الاستراتيجية</p>
+      </div>
+    </div>
+
+    <!-- KR -->
+    <section class="lang show" id="lang-kr">
+      <div class="pill"><span class="dot"></span> 자본 · 시장진입 · 현지화 · 컴플라이언스</div>
+
+      <div class="bigTitle">
+        PHK를 <span class="accent">글로벌 시장</span>으로<br/>
+        빠르고 당당하게 확장합니다.
+      </div>
+
+      <p class="desc">
+        <strong>PHK Global</strong>은 PHK 생태계의 글로벌 확장 플랫폼입니다 —
+        전략적 파트너십, 시장 진입 프로그램, 현지화, 컴플라이언스 체계를 통해
+        지역별 확산 속도를 높입니다.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>무엇을 하는가</h3>
+          <ul>
+            <li>국가·대기업·기관 파트너십 설계 및 협상 지원</li>
+            <li>현지 에이전시/유통/제조 네트워크 구축</li>
+            <li>규제·세무·법무·보안·데이터 컴플라이언스 프레임</li>
+            <li>투자자 IR 자료, 시장진입 스토리, 리스크 관리</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>진입 패키지</h3>
+          <div class="tagRow">
+            <div class="tag">Market Entry Kit</div>
+            <div class="tag">Localization</div>
+            <div class="tag">Compliance</div>
+            <div class="tag">Partner Pipeline</div>
+          </div>
+          <ul style="margin-top:12px;">
+            <li>국가별 90일 런칭 플랜(파일럿 → 확장)</li>
+            <li>현지 언어·결제·운영 프로세스</li>
+            <li>파트너 등급제(전략/공식/리셀러)</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>핵심 원칙</h3>
+          <ul>
+            <li>속도: 2주 안에 첫 파트너 후보군 확보</li>
+            <li>명분: 국가/산업에 필요한 가치로 설득</li>
+            <li>수익: 공급망·플랫폼·금융·서비스로 현금흐름</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>연락</h3>
+          <ul>
+            <li>파트너십 제안 / 국가 프로젝트</li>
+            <li>리셀러 / 에이전시 / 유통 협력</li>
+            <li>투자·IR·시장진입 지원</li>
+          </ul>
+          <div class="btnRow">
+            <button class="btn" onclick="openMail()">Contact</button>
+            <button class="btn secondary" onclick="openMail()">Partnership</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EN -->
+    <section class="lang" id="lang-en">
+      <div class="pill"><span class="dot"></span> Capital · Market Entry · Localization · Compliance</div>
+
+      <div class="bigTitle">
+        Expand PHK into the <span class="accent">global market</span><br/>
+        fast — and with confidence.
+      </div>
+
+      <p class="desc">
+        <strong>PHK Global</strong> is the global expansion platform of the PHK ecosystem —
+        accelerating regional scale through strategic partnerships, market-entry programs,
+        localization, and compliance frameworks.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>What We Do</h3>
+          <ul>
+            <li>Design & support negotiations for government/enterprise partnerships</li>
+            <li>Build local agency, distribution, and manufacturing networks</li>
+            <li>Regulatory, tax, legal, security, and data compliance frameworks</li>
+            <li>Investor IR, market-entry narrative, and risk management</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Entry Packages</h3>
+          <div class="tagRow">
+            <div class="tag">90-Day Launch</div>
+            <div class="tag">Localization</div>
+            <div class="tag">Compliance</div>
+            <div class="tag">Partner Pipeline</div>
+          </div>
+          <ul style="margin-top:12px;">
+            <li>Country playbook: pilot → expansion</li>
+            <li>Language, payments, operations</li>
+            <li>Partner tiers: Strategic / Official / Reseller</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Core Principles</h3>
+          <ul>
+            <li>Speed: secure first partner candidates within 2 weeks</li>
+            <li>Legitimacy: sell value that the country/industry truly needs</li>
+            <li>Revenue: cashflow through supply chain + platform + services</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Contact</h3>
+          <ul>
+            <li>Partnership proposals / national projects</li>
+            <li>Reseller / agency / distribution</li>
+            <li>Investment, IR, market-entry support</li>
+          </ul>
+          <div class="btnRow">
+            <button class="btn" onclick="openMail()">Contact</button>
+            <button class="btn secondary" onclick="openMail()">Partnership</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AR -->
+    <section class="lang" id="lang-ar">
+      <div class="pill"><span class="dot"></span> رأس المال · دخول السوق · التوطين · الامتثال</div>
+
+      <div class="bigTitle">
+        نوسّع PHK إلى <span class="accent">الأسواق العالمية</span><br/>
+        بسرعة… وبثقة.
+      </div>
+
+      <p class="desc">
+        <strong>PHK Global</strong> هي منصة التوسع العالمي لمنظومة PHK —
+        نرفع سرعة الانتشار الإقليمي عبر الشراكات الاستراتيجية، برامج دخول السوق،
+        التوطين، وأطر الامتثال.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>ماذا نفعل</h3>
+          <ul>
+            <li>تصميم ودعم التفاوض لشراكات حكومية/شركات كبرى</li>
+            <li>بناء شبكات الوكالات والتوزيع والتصنيع محلياً</li>
+            <li>أطر الامتثال: التنظيمي، الضريبي، القانوني، الأمني، والبيانات</li>
+            <li>مواد المستثمرين (IR) وقصة دخول السوق وإدارة المخاطر</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>حزم دخول السوق</h3>
+          <div class="tagRow">
+            <div class="tag">خطة 90 يوم</div>
+            <div class="tag">التوطين</div>
+            <div class="tag">الامتثال</div>
+            <div class="tag">سلسلة الشركاء</div>
+          </div>
+          <ul style="margin-top:12px;">
+            <li>دليل الدولة: تجربة → توسع</li>
+            <li>اللغة، الدفع، التشغيل</li>
+            <li>درجات الشركاء: استراتيجي / رسمي / موزّع</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>مبادئنا</h3>
+          <ul>
+            <li>السرعة: الحصول على أول مرشحين للشراكة خلال أسبوعين</li>
+            <li>الشرعية: قيمة حقيقية تحتاجها الدولة/الصناعة</li>
+            <li>الإيراد: تدفق نقدي عبر سلسلة الإمداد + المنصة + الخدمات</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>تواصل</h3>
+          <ul>
+            <li>اقتراح شراكات / مشاريع وطنية</li>
+            <li>موزّع / وكالة / توزيع</li>
+            <li>استثمار، IR، دعم دخول السوق</li>
+          </ul>
+          <div class="btnRow">
+            <button class="btn" onclick="openMail()">Contact</button>
+            <button class="btn secondary" onclick="openMail()">Partnership</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="contact">Contact: <a href="mailto:info@phkbank.com">info@phkbank.com</a></div>
+      <div>© PHK Global</div>
+    </footer>
+
   </div>
 
   <script>
-    (function(){
-      const EMAIL = "info@phkglobal.com";
+    function openMail(){
+      window.location.href = "mailto:info@phkbank.com?subject=PHK%20Global%20Partnership%20Inquiry";
+    }
 
-      const T = {
-        en:{
-          langLabel:"Language",
-          status:"LANG: EN",
-          tagline:"Global Expansion & Strategic Partnerships",
-          kicker:"Capital • Market Entry • Localization • Compliance",
-          heroTitle:'Scale PHK to <span class="grad">global markets</span> with speed and trust.',
-          heroDesc:"PHK Global is the expansion platform for PHK ecosystem — building strategic partnerships, market entry programs, localization, and compliance to accelerate adoption across regions.",
-          cta1:"Our Pillars", cta2:"Programs", cta3:"Contact",
-          focusTag:"Global Focus",
-          focusDesc:"Robotics • Fusion Energy • Space Industry • Financial Infrastructure — one global operating frame.",
+    // --- Language System ---
+    function setActiveChip(lang){
+      const chips = document.querySelectorAll('.langChip');
+      chips.forEach(c => c.classList.toggle('active', c.dataset.lang === lang));
+      const badge = document.getElementById('langNow');
+      if(badge) badge.textContent = (lang || 'kr').toUpperCase();
+    }
 
-          rightTitle:"What PHK Global does",
-          r1:"Partner & capital matchmaking", r1d:"Investors, sovereign partners, strategic corporates, and ecosystem builders.",
-          r2:"Market entry playbooks", r2d:"Pilot programs, regulatory paths, and go-to-market execution.",
-          r3:"Localization & operating support", r3d:"Language, pricing, legal, logistics, and regional operations.",
-          r4:"Compliance & risk layer", r4d:"KYC/AML-ready finance alignment and vendor governance frameworks.",
+    function showLang(lang){
+      ['kr','en','ar'].forEach(id => {
+        const el = document.getElementById('lang-' + id);
+        if(el) el.classList.toggle('show', id === lang);
 
-          pillarsTitle:"4 Global Pillars",
-          pillarsSub:"A unified expansion operating system",
-          p1tag:"Partnership", p1t:"Strategic Alliances", p1d:"Sovereign funds, corporates, universities, and ecosystem partners — structured for long-term outcomes.",
-          p2tag:"Market Entry", p2t:"Pilot → Scale", p2d:"Fast pilots, measurable KPIs, and scalable rollouts across regions with repeatable playbooks.",
-          p3tag:"Localization", p3t:"Regional Operating Support", p3d:"Localization of product, pricing, service, and supply chains to fit each market reality.",
-          p4tag:"Compliance", p4t:"Governance & Risk", p4d:"Compliance-ready frameworks (KYC/AML alignment), vendor governance, and risk mitigation for global trust.",
-          p5tag:"Ecosystem", p5t:"Ecosystem Scaling", p5d:"Developers, suppliers, distribution, and community — turning pilots into durable ecosystems.",
-          p6tag:"Capital", p6t:"Capital Structure", p6d:"Funding paths, JV structuring, and investment memos to align global partners with PHK growth.",
-
-          progTitle:"Programs",
-          progSub:"Clear entry points for partners and investors",
-          progA:"Partner Onboarding",
-          pa1:"Country/Region Partner", pa1d:"Local operating partner for pilots, compliance, and scaling.",
-          pa2:"Industry Partner", pa2d:"Robotics, energy, space, finance — joint go-to-market programs.",
-          pa3:"Supply & Distribution", pa3d:"Parts, manufacturing, logistics, and distribution hubs.",
-          progB:"Investor Path",
-          pb1:"Strategic Equity", pb1d:"Long-term alignment with PHK ecosystem value creation.",
-          pb2:"Project Financing", pb2d:"Country pilots, facilities, and scaling programs with measurable KPIs.",
-          pb3:"JV / SPV", pb3d:"Regional joint ventures with local compliance and governance.",
-
-          contactTitle:"Contact",
-          emailLabel:"Email",
-          footerNote:"PHK Global — expansion platform for partnerships, localization, and global scaling.",
-          copyEmail:"Copy Email",
-          backTop:"Back to top",
-          toastCopied:"Copied",
-          toastCopyFail:"Copy failed"
-        },
-
-        ko:{
-          langLabel:"언어",
-          status:"LANG: KR",
-          tagline:"글로벌 확장·전략 파트너십",
-          kicker:"자본 • 시장진입 • 현지화 • 컴플라이언스",
-          heroTitle:'PHK를 <span class="grad">글로벌 시장</span>으로 빠르고 당당하게 확장합니다.',
-          heroDesc:"PHK Global은 PHK 생태계의 글로벌 확장 플랫폼입니다 — 전략적 파트너십, 시장 진입 프로그램, 현지화, 컴플라이언스 체계를 통해 지역별 확산 속도를 높입니다.",
-          cta1:"핵심 축", cta2:"프로그램", cta3:"연락처",
-          focusTag:"글로벌 포커스",
-          focusDesc:"로보틱스 • 인공태양(핵융합) • 우주산업 • 금융 인프라 — 하나의 글로벌 운영 프레임.",
-
-          rightTitle:"PHK Global의 역할",
-          r1:"파트너·자본 매칭", r1d:"투자자, 국부/국가 파트너, 전략 기업, 생태계 빌더 연결.",
-          r2:"시장진입 플레이북", r2d:"파일럿 → 규제 경로 → GTM 실행까지 재사용 가능한 구조.",
-          r3:"현지화·운영 지원", r3d:"언어, 가격, 법무, 물류, 지역 운영 체계 구축.",
-          r4:"컴플라이언스·리스크 레이어", r4d:"KYC/AML 정합성, 벤더 거버넌스, 글로벌 신뢰 기반.",
-
-          pillarsTitle:"글로벌 4대 축",
-          pillarsSub:"통합 확장 운영체계",
-          p1tag:"파트너십", p1t:"전략 동맹", p1d:"국부펀드, 기업, 대학, 생태계 파트너 — 장기 성과 구조로 설계.",
-          p2tag:"시장진입", p2t:"파일럿 → 확장", p2d:"빠른 파일럿, KPI, 확장 롤아웃을 반복 가능한 프레임으로.",
-          p3tag:"현지화", p3t:"지역 운영 지원", p3d:"제품/가격/서비스/공급망을 시장 현실에 맞게 최적화.",
-          p4tag:"컴플라이언스", p4t:"거버넌스·리스크", p4d:"KYC/AML 정합, 벤더 거버넌스, 리스크 완화로 신뢰 확보.",
-          p5tag:"생태계", p5t:"생태계 확장", p5d:"개발자·공급망·유통·커뮤니티를 파일럿에서 생태계로 전환.",
-          p6tag:"자본", p6t:"자본 구조", p6d:"펀딩 경로, JV 설계, 투자 메모로 성장 정렬.",
-
-          progTitle:"프로그램",
-          progSub:"파트너·투자자용 명확한 진입로",
-          progA:"파트너 온보딩",
-          pa1:"국가/지역 파트너", pa1d:"파일럿, 컴플라이언스, 확장 운영을 담당하는 로컬 파트너.",
-          pa2:"산업 파트너", pa2d:"로봇·에너지·우주·금융 분야 공동 GTM.",
-          pa3:"공급·유통 파트너", pa3d:"부품, 제조, 물류, 유통 허브 구축.",
-          progB:"투자자 경로",
-          pb1:"전략 지분 투자", pb1d:"PHK 생태계 가치 창출에 장기 정렬.",
-          pb2:"프로젝트 파이낸싱", pb2d:"국가 파일럿/시설/확장 프로그램에 KPI 기반 투자.",
-          pb3:"JV / SPV", pb3d:"지역 JV 설계(로컬 준법·거버넌스 포함).",
-
-          contactTitle:"연락처",
-          emailLabel:"이메일",
-          footerNote:"PHK Global — 파트너십, 현지화, 글로벌 확장을 위한 플랫폼.",
-          copyEmail:"이메일 복사",
-          backTop:"맨 위로",
-          toastCopied:"복사 완료",
-          toastCopyFail:"복사 실패"
-        },
-
-        ar:{
-          langLabel:"اللغة",
-          status:"LANG: AR",
-          tagline:"التوسع العالمي والشراكات الاستراتيجية",
-          kicker:"رأس المال • دخول السوق • التوطين • الامتثال",
-          heroTitle:'نوسع PHK إلى <span class="grad">الأسواق العالمية</span> بسرعة وثقة.',
-          heroDesc:"PHK Global هي منصة التوسع لمنظومة PHK — نبني الشراكات الاستراتيجية، برامج دخول السوق، التوطين، وأطر الامتثال لتسريع الانتشار عبر المناطق.",
-          cta1:"ركائزنا", cta2:"البرامج", cta3:"التواصل",
-          focusTag:"التركيز العالمي",
-          focusDesc:"الروبوتات • طاقة الاندماج • صناعة الفضاء • البنية المالية — إطار تشغيل عالمي واحد.",
-
-          rightTitle:"ماذا تفعل PHK Global",
-          r1:"مطابقة الشركاء ورأس المال", r1d:"مستثمرون، شركاء سياديون، شركات استراتيجية، وبناة منظومات.",
-          r2:"أدلة دخول السوق", r2d:"برامج تجريبية، مسارات تنظيمية، وتنفيذ go-to-market.",
-          r3:"التوطين والدعم التشغيلي", r3d:"لغة وتسعير وقانون ولوجستيات وعمليات إقليمية.",
-          r4:"طبقة الامتثال والمخاطر", r4d:"مواءمة مالية جاهزة لـ KYC/AML وأطر حوكمة للموردين.",
-
-          pillarsTitle:"أربع ركائز عالمية",
-          pillarsSub:"نظام تشغيل موحد للتوسع",
-          p1tag:"شراكة", p1t:"تحالفات استراتيجية", p1d:"صناديق سيادية وشركات وجامعات وشركاء منظومة — مصممة لنتائج طويلة الأجل.",
-          p2tag:"دخول السوق", p2t:"تجريبي → توسع", p2d:"تجارب سريعة ومؤشرات قياس قابلة للتوسع عبر مناطق متعددة.",
-          p3tag:"توطين", p3t:"دعم تشغيل إقليمي", p3d:"توطين المنتج والتسعير والخدمة وسلاسل التوريد وفق واقع السوق.",
-          p4tag:"امتثال", p4t:"حوكمة ومخاطر", p4d:"أطر جاهزة للامتثال (KYC/AML) وحوكمة الموردين وتقليل المخاطر لبناء الثقة.",
-          p5tag:"منظومة", p5t:"توسيع المنظومة", p5d:"مطورون وموردون وتوزيع ومجتمع — تحويل التجارب إلى منظومات دائمة.",
-          p6tag:"رأس المال", p6t:"هيكلة رأس المال", p6d:"مسارات تمويل، هيكلة JV، ومذكرات استثمار لمواءمة النمو.",
-
-          progTitle:"البرامج",
-          progSub:"نقاط دخول واضحة للشركاء والمستثمرين",
-          progA:"انضمام الشركاء",
-          pa1:"شريك دولة/منطقة", pa1d:"شريك محلي للتجارب والامتثال والتوسع التشغيلي.",
-          pa2:"شريك صناعي", pa2d:"روبوتات، طاقة، فضاء، تمويل — برامج مشتركة للطرح في السوق.",
-          pa3:"شريك توريد وتوزيع", pa3d:"القطع والتصنيع واللوجستيات ومراكز التوزيع.",
-          progB:"مسار المستثمر",
-          pb1:"استثمار استراتيجي", pb1d:"مواءمة طويلة الأجل مع خلق القيمة في منظومة PHK.",
-          pb2:"تمويل المشاريع", pb2d:"تجارب دولية ومرافق وبرامج توسع مع KPIs قابلة للقياس.",
-          pb3:"JV / SPV", pb3d:"مشاريع مشتركة إقليمية مع امتثال وحوكمة محلية.",
-
-          contactTitle:"التواصل",
-          emailLabel:"البريد",
-          footerNote:"PHK Global — منصة للشراكات والتوطين والتوسع العالمي.",
-          copyEmail:"نسخ البريد",
-          backTop:"أعلى الصفحة",
-          toastCopied:"تم النسخ",
-          toastCopyFail:"فشل النسخ"
-        }
-      };
-
-      const toast = document.getElementById("toast");
-      const toastMsg = document.getElementById("toastMsg");
-
-      function showToast(msg){
-        toastMsg.textContent = msg;
-        toast.classList.add("show");
-        clearTimeout(showToast._t);
-        showToast._t = setTimeout(()=> toast.classList.remove("show"), 2200);
-      }
-
-      function setText(id, value){
-        const el = document.getElementById(id);
-        if (el) el.textContent = value;
-      }
-      function setHTML(id, value){
-        const el = document.getElementById(id);
-        if (el) el.innerHTML = value;
-      }
-
-      function detectLang(){
-        const nav = (navigator.language || "en").toLowerCase();
-        if (nav.startsWith("ko")) return "ko";
-        if (nav.startsWith("ar")) return "ar";
-        return "en";
-      }
-
-      function applyLang(lang){
-        const use = lang || detectLang();
-        const d = T[use] || T.en;
-
-        setText("t_langLabel", d.langLabel);
-        setHTML("t_status", `<b>LANG</b>: ${use.toUpperCase()}`);
-        setText("t_tagline", d.tagline);
-        setText("t_kicker", d.kicker);
-        setHTML("t_heroTitle", d.heroTitle);
-        setText("t_heroDesc", d.heroDesc);
-        setText("t_cta1", d.cta1);
-        setText("t_cta2", d.cta2);
-        setText("t_cta3", d.cta3);
-
-        setText("t_focusTag", d.focusTag);
-        setText("t_focusDesc", d.focusDesc);
-
-        setText("t_rightTitle", d.rightTitle);
-        setText("t_r1", d.r1); setText("t_r1d", d.r1d);
-        setText("t_r2", d.r2); setText("t_r2d", d.r2d);
-        setText("t_r3", d.r3); setText("t_r3d", d.r3d);
-        setText("t_r4", d.r4); setText("t_r4d", d.r4d);
-
-        setText("t_pillarsTitle", d.pillarsTitle);
-        setText("t_pillarsSub", d.pillarsSub);
-
-        setText("t_p1tag", d.p1tag); setText("t_p1t", d.p1t); setText("t_p1d", d.p1d);
-        setText("t_p2tag", d.p2tag); setText("t_p2t", d.p2t); setText("t_p2d", d.p2d);
-        setText("t_p3tag", d.p3tag); setText("t_p3t", d.p3t); setText("t_p3d", d.p3d);
-
-        setText("t_p4tag", d.p4tag); setText("t_p4t", d.p4t); setText("t_p4d", d.p4d);
-        setText("t_p5tag", d.p5tag); setText("t_p5t", d.p5t); setText("t_p5d", d.p5d);
-        setText("t_p6tag", d.p6tag); setText("t_p6t", d.p6t); setText("t_p6d", d.p6d);
-
-        setText("t_progTitle", d.progTitle);
-        setText("t_progSub", d.progSub);
-        setText("t_progA", d.progA);
-        setText("t_pa1", d.pa1); setText("t_pa1d", d.pa1d);
-        setText("t_pa2", d.pa2); setText("t_pa2d", d.pa2d);
-        setText("t_pa3", d.pa3); setText("t_pa3d", d.pa3d);
-
-        setText("t_progB", d.progB);
-        setText("t_pb1", d.pb1); setText("t_pb1d", d.pb1d);
-        setText("t_pb2", d.pb2); setText("t_pb2d", d.pb2d);
-        setText("t_pb3", d.pb3); setText("t_pb3d", d.pb3d);
-
-        setText("t_contactTitle", d.contactTitle);
-        setText("t_emailLabel", d.emailLabel);
-        setText("t_footerNote", d.footerNote);
-        setText("t_copyEmail", d.copyEmail);
-        setText("t_backTop", d.backTop);
-
-        document.documentElement.lang = use;
-        document.documentElement.dir = (use === "ar") ? "rtl" : "ltr";
-
-        document.querySelectorAll(".langBtn").forEach(btn=>{
-          btn.classList.toggle("active", btn.dataset.lang === use);
-        });
-
-        localStorage.setItem("phk_global_lang", use);
-      }
-
-      async function copyToClipboard(text){
-        try{
-          await navigator.clipboard.writeText(text);
-          return true;
-        }catch(e){
-          const ta = document.createElement("textarea");
-          ta.value = text;
-          ta.style.position="fixed";
-          ta.style.left="-9999px";
-          document.body.appendChild(ta);
-          ta.select();
-          try{
-            document.execCommand("copy");
-            document.body.removeChild(ta);
-            return true;
-          }catch(err){
-            document.body.removeChild(ta);
-            return false;
-          }
-        }
-      }
-
-      // init
-      const saved = localStorage.getItem("phk_global_lang") || detectLang();
-      applyLang(saved);
-
-      document.querySelectorAll(".langBtn").forEach(btn=>{
-        btn.addEventListener("click", ()=>{
-          const use = btn.dataset.lang;
-          applyLang(use);
-          const d = T[use] || T.en;
-          showToast(d.status);
-        });
+        const sub = document.getElementById('sub-' + id);
+        if(sub) sub.classList.toggle('show', id === lang);
       });
 
-      document.getElementById("copyEmailBtn").addEventListener("click", async ()=>{
-        const use = document.documentElement.lang || "en";
-        const d = T[use] || T.en;
-        const ok = await copyToClipboard(EMAIL);
-        showToast(ok ? `${d.toastCopied}: ${EMAIL}` : d.toastCopyFail);
+      // RTL
+      document.body.classList.toggle('rtl', lang === 'ar');
+
+      // html lang
+      document.documentElement.lang = (lang === 'kr') ? 'ko' : (lang === 'ar' ? 'ar' : 'en');
+
+      // save
+      localStorage.setItem('phk_lang', lang);
+      setActiveChip(lang);
+    }
+
+    function detectLang(){
+      const saved = localStorage.getItem('phk_lang');
+      if(saved === 'kr' || saved === 'en' || saved === 'ar') return saved;
+      const nav = (navigator.language || '').toLowerCase();
+      if(nav.startsWith('ko')) return 'kr';
+      if(nav.startsWith('ar')) return 'ar';
+      return 'en';
+    }
+
+    // --- Kkassam Dock Toggle ---
+    const fab = document.getElementById('langFab');
+    const panel = document.getElementById('langPanel');
+
+    if(fab && panel){
+      fab.addEventListener('click', () => panel.classList.toggle('open'));
+      document.addEventListener('click', (e) => {
+        if(!panel.contains(e.target) && !fab.contains(e.target)){
+          panel.classList.remove('open');
+        }
       });
-    })();
+    }
+
+    // attach chip handlers
+    document.querySelectorAll('.langChip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const lang = chip.dataset.lang;
+        showLang(lang);
+        if(panel) panel.classList.remove('open');
+      });
+    });
+
+    // init
+    showLang(detectLang());
   </script>
 </body>
 </html>
