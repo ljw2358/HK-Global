@@ -1,246 +1,205 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PiWorldBank</title>
 
 <style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;}
 body{
-margin:0;
-font-family:'Segoe UI',sans-serif;
-background:linear-gradient(135deg,#141e30,#243b55);
+background:linear-gradient(180deg,#0f2027,#203a43,#2c5364);
 color:white;
+min-height:100vh;
 }
 
 header{
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:20px 40px;
-background:rgba(0,0,0,0.4);
-backdrop-filter:blur(10px);
+padding:15px;
 }
 
-.logo{
-font-size:26px;
-font-weight:bold;
-letter-spacing:1px;
-}
-
-.lang-select{
-padding:6px 10px;
-border-radius:20px;
+select{
+padding:8px 12px;
+border-radius:8px;
 border:none;
+background:#1e2f38;
+color:white;
 }
 
-.container{
-padding:40px;
-}
-
-.grid{
+.nav{
 display:grid;
 grid-template-columns:repeat(6,1fr);
-gap:20px;
-margin-top:30px;
+gap:8px;
+padding:15px;
+}
+
+.nav button{
+padding:12px 5px;
+border-radius:20px;
+border:none;
+background:#2c3e50;
+color:white;
+font-size:13px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.nav button:hover{
+background:#3f5c6d;
 }
 
 .card{
-background:rgba(255,255,255,0.08);
-backdrop-filter:blur(12px);
-border-radius:20px;
-padding:30px 10px;
-text-align:center;
-cursor:pointer;
-transition:0.3s;
-font-size:16px;
-font-weight:600;
-}
-
-.card:hover{
-background:#00c6ff;
-color:black;
-transform:translateY(-5px);
-}
-
-.section{
-display:none;
-margin-top:40px;
-background:rgba(255,255,255,0.08);
+margin:30px 15px;
 padding:30px;
 border-radius:20px;
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(12px);
+box-shadow:0 10px 30px rgba(0,0,0,0.4);
 }
 
-.active{
-display:block;
+.balance-title{
+font-size:22px;
+opacity:0.8;
+margin-bottom:15px;
 }
 
-input{
-width:100%;
-padding:12px;
-margin:10px 0;
-border-radius:12px;
-border:none;
-}
-
-button.action{
-width:100%;
-padding:12px;
-border-radius:12px;
-border:none;
-background:#00c6ff;
-cursor:pointer;
+.balance-amount{
+font-size:48px;
 font-weight:bold;
 }
 
-@media(max-width:1000px){
-.grid{
-grid-template-columns:repeat(3,1fr);
-}
-}
-
-@media(max-width:600px){
-.grid{
-grid-template-columns:repeat(2,1fr);
-}
+.section{
+margin:20px 15px;
+padding:20px;
+border-radius:15px;
+background:rgba(255,255,255,0.05);
 }
 
 footer{
 text-align:center;
-margin-top:50px;
-padding:20px;
+padding:40px 10px;
+font-size:14px;
 opacity:0.7;
 }
+
+@media(max-width:600px){
+.nav{
+grid-template-columns:repeat(3,1fr);
+}
+}
 </style>
-
-<script>
-const t={
-en:{pay:"Payment",send:"Transfer",vault:"Vault",reward:"Reward",ubi:"UBI",support:"Support"},
-ko:{pay:"결제",send:"송금",vault:"예치",reward:"리워드",ubi:"UBI",support:"고객센터"},
-zh:{pay:"支付",send:"转账",vault:"存款",reward:"奖励",ubi:"全民收入",support:"客服"},
-ja:{pay:"支払い",send:"送金",vault:"預金",reward:"報酬",ubi:"UBI",support:"サポート"},
-es:{pay:"Pago",send:"Transferencia",vault:"Depósito",reward:"Recompensa",ubi:"UBI",support:"Soporte"},
-fr:{pay:"Paiement",send:"Transfert",vault:"Dépôt",reward:"Récompense",ubi:"UBI",support:"Support"},
-de:{pay:"Zahlung",send:"Überweisung",vault:"Einlage",reward:"Belohnung",ubi:"UBI",support:"Support"},
-ru:{pay:"Платеж",send:"Перевод",vault:"Вклад",reward:"Награда",ubi:"UBI",support:"Поддержка"},
-pt:{pay:"Pagamento",send:"Transferência",vault:"Depósito",reward:"Recompensa",ubi:"UBI",support:"Suporte"},
-it:{pay:"Pagamento",send:"Trasferimento",vault:"Deposito",reward:"Ricompensa",ubi:"UBI",support:"Supporto"},
-hi:{pay:"भुगतान",send:"ट्रांसफर",vault:"जमा",reward:"इनाम",ubi:"UBI",support:"सहायता"},
-tr:{pay:"Ödeme",send:"Transfer",vault:"Mevduat",reward:"Ödül",ubi:"UBI",support:"Destek"},
-vi:{pay:"Thanh toán",send:"Chuyển tiền",vault:"Gửi tiền",reward:"Thưởng",ubi:"UBI",support:"Hỗ trợ"},
-th:{pay:"ชำระเงิน",send:"โอนเงิน",vault:"ฝากเงิน",reward:"รางวัล",ubi:"UBI",support:"ฝ่ายช่วยเหลือ"},
-id:{pay:"Pembayaran",send:"Transfer",vault:"Deposito",reward:"Hadiah",ubi:"UBI",support:"Dukungan"},
-nl:{pay:"Betaling",send:"Overboeking",vault:"Storting",reward:"Beloning",ubi:"UBI",support:"Ondersteuning"},
-pl:{pay:"Płatność",send:"Transfer",vault:"Depozyt",reward:"Nagroda",ubi:"UBI",support:"Wsparcie"},
-sv:{pay:"Betalning",send:"Överföring",vault:"Insättning",reward:"Belöning",ubi:"UBI",support:"Support"},
-he:{pay:"תשלום",send:"העברה",vault:"הפקדה",reward:"תגמול",ubi:"UBI",support:"תמיכה"},
-ar:{pay:"دفع",send:"تحويل",vault:"إيداع",reward:"مكافأة",ubi:"UBI",support:"الدعم"}
-};
-
-function setLang(l){
-if(!t[l]) l="en";
-document.getElementById("pay").innerText=t[l].pay;
-document.getElementById("send").innerText=t[l].send;
-document.getElementById("vault").innerText=t[l].vault;
-document.getElementById("reward").innerText=t[l].reward;
-document.getElementById("ubi").innerText=t[l].ubi;
-document.getElementById("support").innerText=t[l].support;
-}
-
-window.onload=function(){
-let l=navigator.language.slice(0,2);
-setLang(l);
-}
-
-function openSection(id){
-let s=document.getElementsByClassName("section");
-for(let i=0;i<s.length;i++) s[i].classList.remove("active");
-document.getElementById(id).classList.add("active");
-}
-</script>
-
 </head>
+
 <body>
 
 <header>
-<div class="logo">🌍 PiWorldBank</div>
-<select class="lang-select" onchange="setLang(this.value)">
-<option value="en">EN</option>
-<option value="ko">KO</option>
-<option value="zh">ZH</option>
-<option value="ja">JA</option>
-<option value="es">ES</option>
-<option value="fr">FR</option>
-<option value="de">DE</option>
-<option value="ru">RU</option>
-<option value="pt">PT</option>
-<option value="it">IT</option>
-<option value="hi">HI</option>
-<option value="tr">TR</option>
-<option value="vi">VI</option>
-<option value="th">TH</option>
-<option value="id">ID</option>
-<option value="nl">NL</option>
-<option value="pl">PL</option>
-<option value="sv">SV</option>
-<option value="he">HE</option>
-<option value="ar">AR</option>
+<h3>🌍 PiWorldBank</h3>
+
+<select id="language" onchange="changeLanguage()">
+<option value="ko">한국어</option>
+<option value="en">English</option>
+<option value="zh">中文</option>
+<option value="ja">日本語</option>
+<option value="es">Español</option>
+<option value="fr">Français</option>
+<option value="de">Deutsch</option>
+<option value="ru">Русский</option>
+<option value="ar">العربية</option>
+<option value="hi">हिन्दी</option>
+<option value="pt">Português</option>
+<option value="it">Italiano</option>
+<option value="vi">Tiếng Việt</option>
+<option value="th">ไทย</option>
+<option value="id">Bahasa</option>
+<option value="tr">Türkçe</option>
+<option value="nl">Nederlands</option>
+<option value="sv">Svenska</option>
+<option value="pl">Polski</option>
+<option value="uk">Українська</option>
 </select>
 </header>
 
-<div class="container">
-
-<div class="grid">
-<div class="card" id="pay" onclick="openSection('payment')">Payment</div>
-<div class="card" id="send" onclick="openSection('transfer')">Transfer</div>
-<div class="card" id="vault" onclick="openSection('vaultSec')">Vault</div>
-<div class="card" id="reward" onclick="openSection('rewardSec')">Reward</div>
-<div class="card" id="ubi" onclick="openSection('ubiSec')">UBI</div>
-<div class="card" id="support" onclick="openSection('supportSec')">Support</div>
+<div class="nav">
+<button data-key="dashboard">대시보드</button>
+<button data-key="pay">결제</button>
+<button data-key="send">송금</button>
+<button data-key="stake">예치</button>
+<button data-key="reward">리워드</button>
+<button data-key="ubi">UBI</button>
+<button data-key="liquidity">유동성풀</button>
+<button data-key="media">미디어</button>
+<button data-key="support">고객센터</button>
 </div>
 
-<div id="payment" class="section">
-<h2>Payment</h2>
-<input placeholder="Amount (Pi)">
-<button class="action">Execute Payment</button>
+<div class="card">
+<div class="balance-title" data-key="total">총 잔액</div>
+<div class="balance-amount">400 Pi</div>
 </div>
 
-<div id="transfer" class="section">
-<h2>Transfer</h2>
-<input placeholder="Receiver">
-<input placeholder="Amount (Pi)">
-<button class="action">Send</button>
-</div>
-
-<div id="vaultSec" class="section">
-<h2>Vault</h2>
-<input placeholder="Deposit Amount (Pi)">
-<button class="action">Start Deposit</button>
-</div>
-
-<div id="rewardSec" class="section">
-<h2>Reward</h2>
-<button class="action">Daily Check-in</button>
-</div>
-
-<div id="ubiSec" class="section">
-<h2>UBI</h2>
-<p>Universal Basic Income distribution module ready.</p>
-</div>
-
-<div id="supportSec" class="section">
-<h2>Customer Support</h2>
-<input placeholder="Email">
-<input placeholder="Message">
-<button class="action">Submit</button>
-</div>
-
+<div class="section">
+<h4 data-key="news">📢 공지사항</h4>
+<p data-key="welcome">PiWorldBank에 오신 것을 환영합니다.</p>
 </div>
 
 <footer>
 Contact: info@hkglobal.com<br>
 © 2026 PiWorldBank
 </footer>
+
+<script>
+const translations={
+ko:{
+dashboard:"대시보드",
+pay:"결제",
+send:"송금",
+stake:"예치",
+reward:"리워드",
+ubi:"UBI",
+liquidity:"유동성풀",
+media:"미디어",
+support:"고객센터",
+total:"총 잔액",
+news:"공지사항",
+welcome:"PiWorldBank에 오신 것을 환영합니다."
+},
+en:{
+dashboard:"Dashboard",
+pay:"Pay",
+send:"Send",
+stake:"Deposit",
+reward:"Reward",
+ubi:"UBI",
+liquidity:"Liquidity Pool",
+media:"Media",
+support:"Support",
+total:"Total Balance",
+news:"Notice",
+welcome:"Welcome to PiWorldBank."
+}
+};
+
+function changeLanguage(){
+const lang=document.getElementById("language").value;
+const elements=document.querySelectorAll("[data-key]");
+elements.forEach(el=>{
+const key=el.getAttribute("data-key");
+if(translations[lang] && translations[lang][key]){
+el.innerText=translations[lang][key];
+}
+});
+}
+
+// 자동 브라우저 언어 감지
+window.onload=function(){
+const browserLang=navigator.language.substring(0,2);
+if(translations[browserLang]){
+document.getElementById("language").value=browserLang;
+changeLanguage();
+}
+}
+</script>
 
 </body>
 </html>
