@@ -1,265 +1,258 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HK Global | Future Industry Group</title>
+<title>PiWorldBank</title>
 
 <style>
 body{
-    margin:0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: linear-gradient(135deg,#000000,#0f2027,#1f1c2c,#243b55);
-    color:white;
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
+background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+color:white;
 }
 
-.container{
-    max-width:1200px;
-    margin:auto;
-    padding:90px 30px;
+header{
+padding:20px;
+text-align:center;
+background:#111;
+font-size:24px;
+font-weight:bold;
 }
 
-h1{
-    font-size:64px;
-    background: linear-gradient(90deg,#00f5ff,#00ff94,#7b2cff,#ff00cc,#00c3ff);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    margin-bottom:20px;
+nav{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+background:#1c1c1c;
 }
 
-.subtitle{
-    font-size:22px;
-    color:#cccccc;
-    margin-bottom:70px;
+nav button{
+margin:5px;
+padding:8px 12px;
+border:none;
+border-radius:20px;
+cursor:pointer;
+background:#333;
+color:white;
+font-size:12px;
+}
+
+nav button:hover{
+background:#00c6ff;
+color:black;
 }
 
 .section{
-    margin-bottom:80px;
+display:none;
+padding:20px;
 }
 
-.section h2{
-    font-size:30px;
-    color:#00ffe7;
-    border-bottom:1px solid rgba(255,255,255,0.2);
-    padding-bottom:10px;
-    margin-bottom:25px;
-}
-
-.grid{
-    display:grid;
-    grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
-    gap:30px;
+.active{
+display:block;
 }
 
 .card{
-    background: rgba(255,255,255,0.06);
-    padding:30px;
-    border-radius:18px;
-    border:1px solid rgba(0,255,231,0.3);
-    transition:0.4s;
+background:rgba(255,255,255,0.08);
+padding:20px;
+margin:15px 0;
+border-radius:15px;
 }
 
-.card:hover{
-    transform:translateY(-10px);
-    border-color:#00ffe7;
-    box-shadow:0 0 25px #00ffe7;
+input,select{
+width:100%;
+padding:10px;
+margin:5px 0;
+border-radius:10px;
+border:none;
 }
 
-.language-buttons{
-    position:absolute;
-    top:25px;
-    right:40px;
+.action-btn{
+padding:10px;
+background:#00c6ff;
+border:none;
+border-radius:10px;
+cursor:pointer;
+width:100%;
+margin-top:10px;
 }
 
-.language-buttons button{
-    background:transparent;
-    border:1px solid #00ffe7;
-    color:#00ffe7;
-    padding:8px 15px;
-    margin-left:10px;
-    cursor:pointer;
-    font-weight:bold;
+.lang-select{
+position:absolute;
+top:20px;
+right:20px;
 }
 
-.language-buttons button:hover{
-    background:#00ffe7;
-    color:black;
-}
-
-.footer{
-    margin-top:100px;
-    font-size:16px;
-    color:#aaaaaa;
-    border-top:1px solid rgba(255,255,255,0.2);
-    padding-top:35px;
-}
-.highlight{
-    color:#00ff94;
-    font-weight:bold;
+footer{
+text-align:center;
+padding:20px;
+opacity:0.7;
+font-size:14px;
 }
 </style>
 
 <script>
-function changeLanguage(lang){
-
-const content = {
-
-ko:{
-title:"HK Global",
-subtitle:"로보틱스 · AI · 디지털금융 · 에너지 · 글로벌 투자 통합 플랫폼",
-overview:"HK Global은 미래 산업을 통합하는 초대형 글로벌 전략 그룹으로 로보틱스, 인공지능, Web3 금융, 첨단소재, 친환경 에너지 및 글로벌 투자 네트워크를 구축합니다.",
-strategy:"글로벌 확장 전략",
-strategyText:"미국 · 한국 · 중국 · 중동 · 유럽을 연결하는 기술 및 자본 네트워크를 통해 세계 산업 패러다임을 재편합니다.",
-portfolio:[
-"AI Robotics & Automation",
-"Web3 Digital Finance",
-"Advanced Materials & Smart Steel",
-"Green Energy & Infrastructure",
-"Global Strategic Investment"
-],
-investment:"투자 및 성장 모델",
-investmentText:"글로벌 M&A, 전략적 합작 투자, 기술 스타트업 인큐베이팅, 국가 단위 프로젝트 참여",
-vision:"Vision 2040",
-visionText:"기술과 자본을 연결하여 세계 경제를 재정의하는 글로벌 리더.",
-contact:"문의: info@hkglobal.com"
-},
-
-en:{
-title:"HK Global",
-subtitle:"Integrated Platform for Robotics · AI · Digital Finance · Energy · Global Investment",
-overview:"HK Global is a next-generation strategic global group integrating robotics, artificial intelligence, Web3 finance, advanced materials, sustainable energy and global capital networks.",
-strategy:"Global Expansion Strategy",
-strategyText:"Connecting the U.S., Korea, China, Middle East and Europe through technology and capital to reshape global industry.",
-portfolio:[
-"AI Robotics & Automation",
-"Web3 Digital Finance",
-"Advanced Materials & Smart Steel",
-"Green Energy & Infrastructure",
-"Global Strategic Investment"
-],
-investment:"Investment & Growth Model",
-investmentText:"Global M&A, strategic joint ventures, technology incubation and sovereign-level projects.",
-vision:"Vision 2040",
-visionText:"Redefining the Global Economy Through Technology & Capital.",
-contact:"Contact: info@hkglobal.com"
-},
-
-zh:{
-title:"HK Global",
-subtitle:"机器人 · 人工智能 · 数字金融 · 能源 · 全球投资平台",
-overview:"HK Global是一家整合机器人、人工智能、Web3金融、先进材料、绿色能源与全球资本网络的未来产业集团。",
-strategy:"全球扩张战略",
-strategyText:"连接美国、韩国、中国、中东与欧洲，重塑全球产业格局。",
-portfolio:[
-"AI机器人与自动化",
-"Web3数字金融",
-"先进材料与智能钢铁",
-"绿色能源与基础设施",
-"全球战略投资"
-],
-investment:"投资与增长模式",
-investmentText:"全球并购、战略合资、科技孵化与国家级项目合作。",
-vision:"2040愿景",
-visionText:"通过科技与资本重新定义全球经济。",
-contact:"联系: info@hkglobal.com"
-},
-
-ar:{
-title:"HK Global",
-subtitle:"منصة عالمية للروبوتات والذكاء الاصطناعي والتمويل الرقمي والطاقة والاستثمار",
-overview:"HK Global هي مجموعة استراتيجية عالمية تدمج الروبوتات والذكاء الاصطناعي والتمويل الرقمي Web3 والطاقة المستدامة وشبكات الاستثمار العالمية.",
-strategy:"استراتيجية التوسع العالمي",
-strategyText:"ربط الولايات المتحدة وكوريا والصين والشرق الأوسط وأوروبا لإعادة تشكيل الصناعة العالمية.",
-portfolio:[
-"روبوتات وذكاء اصطناعي",
-"التمويل الرقمي Web3",
-"مواد متقدمة وفولاذ ذكي",
-"طاقة خضراء وبنية تحتية",
-"استثمار استراتيجي عالمي"
-],
-investment:"نموذج الاستثمار والنمو",
-investmentText:"استحواذات عالمية وشراكات استراتيجية ومشاريع سيادية.",
-vision:"رؤية 2040",
-visionText:"إعادة تعريف الاقتصاد العالمي من خلال التكنولوجيا ورأس المال.",
-contact:"للتواصل: info@hkglobal.com"
-}
+const translations={
+en:{dashboard:"Dashboard",payment:"Payment",transfer:"Transfer",vault:"Vault",reward:"Reward",liquidity:"Liquidity Pool",media:"Media",support:"Support",balance:"Total Balance",contact:"Contact"},
+ko:{dashboard:"대시보드",payment:"결제",transfer:"송금",vault:"예치",reward:"리워드",liquidity:"유동성풀",media:"미디어",support:"고객센터",balance:"총 잔액",contact:"문의"},
+zh:{dashboard:"仪表盘",payment:"支付",transfer:"转账",vault:"存款",reward:"奖励",liquidity:"流动池",media:"媒体",support:"客服",balance:"总余额",contact:"联系"},
+ja:{dashboard:"ダッシュボード",payment:"支払い",transfer:"送金",vault:"預金",reward:"報酬",liquidity:"流動性プール",media:"メディア",support:"サポート",balance:"総残高",contact:"連絡"},
+ar:{dashboard:"لوحة التحكم",payment:"دفع",transfer:"تحويل",vault:"إيداع",reward:"مكافأة",liquidity:"مجمع السيولة",media:"إعلام",support:"الدعم",balance:"الرصيد الإجمالي",contact:"اتصال"},
+es:{dashboard:"Panel",payment:"Pago",transfer:"Transferencia",vault:"Depósito",reward:"Recompensa",liquidity:"Liquidez",media:"Medios",support:"Soporte",balance:"Saldo Total",contact:"Contacto"},
+fr:{dashboard:"Tableau",payment:"Paiement",transfer:"Transfert",vault:"Dépôt",reward:"Récompense",liquidity:"Liquidité",media:"Média",support:"Support",balance:"Solde Total",contact:"Contact"},
+de:{dashboard:"Dashboard",payment:"Zahlung",transfer:"Überweisung",vault:"Einlage",reward:"Belohnung",liquidity:"Liquidität",media:"Medien",support:"Support",balance:"Gesamtguthaben",contact:"Kontakt"},
+ru:{dashboard:"Панель",payment:"Платеж",transfer:"Перевод",vault:"Вклад",reward:"Награда",liquidity:"Ликвидность",media:"Медиа",support:"Поддержка",balance:"Общий баланс",contact:"Контакт"},
+pt:{dashboard:"Painel",payment:"Pagamento",transfer:"Transferência",vault:"Depósito",reward:"Recompensa",liquidity:"Liquidez",media:"Mídia",support:"Suporte",balance:"Saldo Total",contact:"Contato"},
+it:{dashboard:"Pannello",payment:"Pagamento",transfer:"Trasferimento",vault:"Deposito",reward:"Ricompensa",liquidity:"Liquidità",media:"Media",support:"Supporto",balance:"Saldo Totale",contact:"Contatto"},
+hi:{dashboard:"डैशबोर्ड",payment:"भुगतान",transfer:"ट्रांसफर",vault:"जमा",reward:"इनाम",liquidity:"लिक्विडिटी",media:"मीडिया",support:"सहायता",balance:"कुल बैलेंस",contact:"संपर्क"},
+tr:{dashboard:"Panel",payment:"Ödeme",transfer:"Transfer",vault:"Mevduat",reward:"Ödül",liquidity:"Likidite",media:"Medya",support:"Destek",balance:"Toplam Bakiye",contact:"İletişim"},
+vi:{dashboard:"Bảng điều khiển",payment:"Thanh toán",transfer:"Chuyển tiền",vault:"Gửi tiền",reward:"Thưởng",liquidity:"Thanh khoản",media:"Truyền thông",support:"Hỗ trợ",balance:"Tổng số dư",contact:"Liên hệ"},
+th:{dashboard:"แดชบอร์ด",payment:"ชำระเงิน",transfer:"โอนเงิน",vault:"ฝากเงิน",reward:"รางวัล",liquidity:"สภาพคล่อง",media:"สื่อ",support:"ฝ่ายช่วยเหลือ",balance:"ยอดรวม",contact:"ติดต่อ"},
+id:{dashboard:"Dasbor",payment:"Pembayaran",transfer:"Transfer",vault:"Deposito",reward:"Hadiah",liquidity:"Likuiditas",media:"Media",support:"Dukungan",balance:"Saldo Total",contact:"Kontak"},
+nl:{dashboard:"Dashboard",payment:"Betaling",transfer:"Overboeking",vault:"Storting",reward:"Beloning",liquidity:"Liquiditeit",media:"Media",support:"Ondersteuning",balance:"Totaal Saldo",contact:"Contact"},
+pl:{dashboard:"Panel",payment:"Płatność",transfer:"Transfer",vault:"Depozyt",reward:"Nagroda",liquidity:"Płynność",media:"Media",support:"Wsparcie",balance:"Saldo Całkowite",contact:"Kontakt"},
+sv:{dashboard:"Instrumentpanel",payment:"Betalning",transfer:"Överföring",vault:"Insättning",reward:"Belöning",liquidity:"Likviditet",media:"Media",support:"Support",balance:"Totalt Saldo",contact:"Kontakt"},
+he:{dashboard:"לוח בקרה",payment:"תשלום",transfer:"העברה",vault:"הפקדה",reward:"תגמול",liquidity:"נזילות",media:"מדיה",support:"תמיכה",balance:"יתרה כוללת",contact:"צור קשר"}
 };
 
-document.getElementById("title").innerText=content[lang].title;
-document.getElementById("subtitle").innerText=content[lang].subtitle;
-document.getElementById("overview").innerText=content[lang].overview;
-document.getElementById("strategyTitle").innerText=content[lang].strategy;
-document.getElementById("strategyText").innerText=content[lang].strategyText;
-document.getElementById("investmentTitle").innerText=content[lang].investment;
-document.getElementById("investmentText").innerText=content[lang].investmentText;
-document.getElementById("visionTitle").innerText=content[lang].vision;
-document.getElementById("visionText").innerText=content[lang].visionText;
-document.getElementById("contact").innerText=content[lang].contact;
-
-let grid=document.getElementById("portfolioList");
-grid.innerHTML="";
-content[lang].portfolio.forEach(item=>{
-let div=document.createElement("div");
-div.className="card";
-div.innerText=item;
-grid.appendChild(div);
-});
-
-if(lang=="ar"){document.body.style.direction="rtl";}
-else{document.body.style.direction="ltr";}
+function setLanguage(lang){
+if(!translations[lang]) lang="en";
+document.getElementById("nav-dashboard").innerText=translations[lang].dashboard;
+document.getElementById("nav-payment").innerText=translations[lang].payment;
+document.getElementById("nav-transfer").innerText=translations[lang].transfer;
+document.getElementById("nav-vault").innerText=translations[lang].vault;
+document.getElementById("nav-reward").innerText=translations[lang].reward;
+document.getElementById("nav-liquidity").innerText=translations[lang].liquidity;
+document.getElementById("nav-media").innerText=translations[lang].media;
+document.getElementById("nav-support").innerText=translations[lang].support;
+document.getElementById("balance-title").innerText=translations[lang].balance;
+document.getElementById("contact-title").innerText=translations[lang].contact;
 }
-</script>
-</head>
 
+function autoDetect(){
+let lang=navigator.language.slice(0,2);
+setLanguage(lang);
+}
+
+function showSection(id){
+let sections=document.getElementsByClassName("section");
+for(let i=0;i<sections.length;i++){
+sections[i].classList.remove("active");
+}
+document.getElementById(id).classList.add("active");
+}
+
+window.onload=autoDetect;
+</script>
+
+</head>
 <body>
 
-<div class="language-buttons">
-<button onclick="changeLanguage('ko')">한국어</button>
-<button onclick="changeLanguage('en')">English</button>
-<button onclick="changeLanguage('zh')">中文</button>
-<button onclick="changeLanguage('ar')">العربية</button>
+<header>
+🌍 PiWorldBank
+<select class="lang-select" onchange="setLanguage(this.value)">
+<option value="en">EN</option>
+<option value="ko">KO</option>
+<option value="zh">ZH</option>
+<option value="ja">JA</option>
+<option value="ar">AR</option>
+<option value="es">ES</option>
+<option value="fr">FR</option>
+<option value="de">DE</option>
+<option value="ru">RU</option>
+<option value="pt">PT</option>
+<option value="it">IT</option>
+<option value="hi">HI</option>
+<option value="tr">TR</option>
+<option value="vi">VI</option>
+<option value="th">TH</option>
+<option value="id">ID</option>
+<option value="nl">NL</option>
+<option value="pl">PL</option>
+<option value="sv">SV</option>
+<option value="he">HE</option>
+</select>
+</header>
+
+<nav>
+<button id="nav-dashboard" onclick="showSection('dashboard')">Dashboard</button>
+<button id="nav-payment" onclick="showSection('payment')">Payment</button>
+<button id="nav-transfer" onclick="showSection('transfer')">Transfer</button>
+<button id="nav-vault" onclick="showSection('vault')">Vault</button>
+<button id="nav-reward" onclick="showSection('reward')">Reward</button>
+<button id="nav-liquidity" onclick="showSection('liquidity')">Liquidity</button>
+<button id="nav-media" onclick="showSection('media')">Media</button>
+<button id="nav-support" onclick="showSection('support')">Support</button>
+</nav>
+
+<div id="dashboard" class="section active">
+<div class="card">
+<h2 id="balance-title">Total Balance</h2>
+<h1>400 Pi</h1>
+</div>
 </div>
 
-<div class="container">
-
-<h1 id="title">HK Global</h1>
-<div class="subtitle" id="subtitle"></div>
-
-<div class="section">
-<h2>Overview</h2>
-<p id="overview"></p>
+<div id="payment" class="section">
+<div class="card">
+<input type="number" placeholder="Amount (Pi)">
+<button class="action-btn">Pay</button>
+</div>
 </div>
 
-<div class="section">
-<h2 id="strategyTitle"></h2>
-<p id="strategyText"></p>
+<div id="transfer" class="section">
+<div class="card">
+<input type="text" placeholder="Receiver">
+<input type="number" placeholder="Amount (Pi)">
+<button class="action-btn">Send</button>
+</div>
 </div>
 
-<div class="section">
-<h2>Core Platforms</h2>
-<div class="grid" id="portfolioList"></div>
+<div id="vault" class="section">
+<div class="card">
+<select>
+<option>30 Days</option>
+<option>90 Days</option>
+<option>180 Days</option>
+</select>
+<input type="number" placeholder="Amount (Pi)">
+<button class="action-btn">Deposit</button>
+</div>
 </div>
 
-<div class="section">
-<h2 id="investmentTitle"></h2>
-<p id="investmentText"></p>
+<div id="reward" class="section">
+<div class="card">
+<button class="action-btn">Check-in Reward</button>
+</div>
 </div>
 
-<div class="section">
-<h2 id="visionTitle"></h2>
-<p id="visionText"></p>
+<div id="liquidity" class="section">
+<div class="card">
+<input type="number" placeholder="Amount (Pi)">
+<button class="action-btn">Join Pool</button>
+</div>
 </div>
 
-<div class="footer">
-<p id="contact"></p>
-© 2026 HK Global | Future Industry Strategic Group
+<div id="media" class="section">
+<div class="card">
+<a href="https://youtube.com" target="_blank">YouTube</a><br><br>
+<a href="https://tiktok.com" target="_blank">TikTok</a>
+</div>
 </div>
 
+<div id="support" class="section">
+<div class="card">
+<h3 id="contact-title">Contact</h3>
+<input type="text" placeholder="Email">
+<input type="text" placeholder="Message">
+<button class="action-btn">Submit</button>
+</div>
 </div>
 
-<script>
-changeLanguage('ko');
-</script>
+<footer>
+Contact: info@hkglobal.com<br>
+© 2026 PiWorldBank
+</footer>
 
 </body>
 </html>
