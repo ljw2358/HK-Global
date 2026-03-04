@@ -3,31 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PiWorldBank | Web3 Digital Bank</title>
+<title>PiWorldBank | Ultimate Edition</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;}
 body{
 background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
 color:white;
 min-height:100vh;
 }
-
 header{
 display:flex;
 justify-content:space-between;
 align-items:center;
 padding:18px;
-background:rgba(0,0,0,0.3);
+background:rgba(0,0,0,0.4);
 backdrop-filter:blur(10px);
 }
-
-.logo{
-font-size:20px;
-font-weight:bold;
-letter-spacing:1px;
-}
-
+.logo{font-weight:bold;font-size:20px;}
 select{
 padding:8px 12px;
 border-radius:10px;
@@ -35,21 +28,8 @@ border:none;
 background:#1e2f38;
 color:white;
 }
-
-.hero{
-padding:40px 20px;
-text-align:center;
-}
-
-.hero h1{
-font-size:32px;
-margin-bottom:10px;
-}
-
-.hero p{
-opacity:0.8;
-}
-
+.hero{text-align:center;padding:40px 20px;}
+.hero h1{font-size:30px;margin-bottom:10px;}
 .dex-banner{
 margin:20px;
 padding:18px;
@@ -57,16 +37,13 @@ border-radius:15px;
 background:linear-gradient(90deg,#ff8c00,#ff3c00);
 text-align:center;
 font-weight:bold;
-box-shadow:0 10px 30px rgba(0,0,0,0.4);
 }
-
 .nav{
 display:grid;
 grid-template-columns:repeat(6,1fr);
 gap:10px;
 padding:20px;
 }
-
 .nav button{
 padding:14px 6px;
 border-radius:30px;
@@ -75,63 +52,54 @@ background:rgba(255,255,255,0.1);
 color:white;
 cursor:pointer;
 transition:0.3s;
-font-size:13px;
 }
-
 .nav button:hover{
 background:rgba(255,255,255,0.25);
 transform:translateY(-2px);
 }
-
-.card{
-margin:30px 20px;
-padding:35px;
-border-radius:25px;
-background:rgba(255,255,255,0.08);
-backdrop-filter:blur(15px);
-box-shadow:0 20px 50px rgba(0,0,0,0.5);
-}
-
-.balance-title{
-font-size:20px;
-opacity:0.7;
-margin-bottom:15px;
-}
-
-.balance-amount{
-font-size:56px;
-font-weight:bold;
-letter-spacing:2px;
-}
-
-.section{
+.card,.section{
 margin:25px 20px;
-padding:25px;
+padding:30px;
 border-radius:20px;
-background:rgba(255,255,255,0.05);
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(12px);
 }
-
-.section h3{
-margin-bottom:12px;
+.balance-amount{font-size:50px;font-weight:bold;}
+input{
+padding:10px;
+border-radius:8px;
+border:none;
+margin:5px 0;
+width:100%;
 }
-
+button.action{
+margin-top:10px;
+padding:10px;
+border:none;
+border-radius:10px;
+background:#00c6ff;
+color:black;
+font-weight:bold;
+cursor:pointer;
+}
+table{
+width:100%;
+margin-top:10px;
+border-collapse:collapse;
+}
+td,th{
+padding:8px;
+border-bottom:1px solid rgba(255,255,255,0.2);
+font-size:14px;
+}
 footer{
 text-align:center;
 padding:40px 15px;
-font-size:14px;
 opacity:0.6;
 }
-
+.hidden{display:none;}
 @media(max-width:700px){
-.nav{
-grid-template-columns:repeat(3,1fr);
-}
-.hero h1{
-font-size:24px;
-}
-.balance-amount{
-font-size:40px;
-}
+.nav{grid-template-columns:repeat(3,1fr);}
 }
 </style>
 </head>
@@ -140,113 +108,111 @@ font-size:40px;
 
 <header>
 <div class="logo">🌍 PiWorldBank</div>
-
-<select id="language" onchange="changeLanguage()">
-<option value="ko">한국어</option>
-<option value="en">English</option>
-<option value="zh">中文</option>
-<option value="es">Español</option>
-<option value="ar">العربية</option>
-<option value="fr">Français</option>
-<option value="de">Deutsch</option>
-<option value="ru">Русский</option>
+<select id="language">
+<option>한국어</option>
+<option>English</option>
 </select>
 </header>
 
 <div class="hero">
-<h1 data-key="headline">Web3 기반 글로벌 디지털 은행</h1>
-<p data-key="sub">Open Mainnet 이후 DEX와 유동성 풀 기반 확장 전략</p>
+<h1>Web3 Digital Bank & DEX Ecosystem</h1>
+<p>Liquidity · DEX · UBI · Global Expansion</p>
 </div>
 
 <div class="dex-banner">
-🚀 3월 12일 자체 DEX 거래소 런칭 예정
+🚀 3월 12일 자체 DEX 거래소 런칭
 </div>
 
 <div class="nav">
-<button data-key="pay">결제</button>
-<button data-key="send">송금</button>
-<button data-key="deposit">예치</button>
-<button data-key="reward">리워드</button>
-<button data-key="ubi">UBI</button>
-<button data-key="support">고객센터</button>
+<button>결제</button>
+<button>송금</button>
+<button>예치</button>
+<button>리워드</button>
+<button>UBI</button>
+<button onclick="adminLogin()">관리자</button>
 </div>
 
 <div class="card">
-<div class="balance-title" data-key="total">총 잔액</div>
-<div class="balance-amount">400 Pi</div>
+<div>총 잔액</div>
+<div class="balance-amount" id="balance">400 Pi</div>
 </div>
 
 <div class="section">
-<h3 data-key="dex_title">DEX 전략</h3>
-<p data-key="dex_desc">
-Open Mainnet 이후 유동성 풀을 활용하여 
-스왑, 수수료 수익, 자산 확대 구조를 구축합니다.
-</p>
+<h3>DEX 스왑 시뮬레이터</h3>
+<input type="number" id="swapAmount" placeholder="Pi 입력">
+<button class="action" onclick="simulateSwap()">USDT로 스왑</button>
+<div id="swapResult"></div>
 </div>
 
 <div class="section">
-<h3 data-key="lp_title">유동성 풀 비전</h3>
-<p data-key="lp_desc">
-초기 유동성 공급자(First Liquidity Provider)는 
-거래 수수료 수익을 선점할 수 있습니다.
-</p>
+<h3>유동성 풀 APR 계산기</h3>
+<input type="number" id="lpAmount" placeholder="예치 Pi 수량">
+<input type="number" id="apr" placeholder="예상 APR (%)">
+<button class="action" onclick="calculateAPR()">수익 계산</button>
+<div id="aprResult"></div>
+</div>
+
+<div class="section">
+<h3>거래 내역</h3>
+<table>
+<thead>
+<tr><th>타입</th><th>수량</th><th>시간</th></tr>
+</thead>
+<tbody id="txTable"></tbody>
+</table>
+</div>
+
+<div class="section hidden" id="adminPanel">
+<h3>관리자 모드</h3>
+<button class="action" onclick="mint()">+100 Pi 민트</button>
 </div>
 
 <footer>
 Contact: info@hkglobal.com<br>
-© 2026 PiWorldBank Hackathon Edition
+© 2026 PiWorldBank Ultimate Edition
 </footer>
 
 <script>
-const translations={
-ko:{
-headline:"Web3 기반 글로벌 디지털 은행",
-sub:"Open Mainnet 이후 DEX와 유동성 풀 기반 확장 전략",
-pay:"결제",
-send:"송금",
-deposit:"예치",
-reward:"리워드",
-ubi:"UBI",
-support:"고객센터",
-total:"총 잔액",
-dex_title:"DEX 전략",
-dex_desc:"Open Mainnet 이후 유동성 풀을 활용하여 스왑, 수수료 수익, 자산 확대 구조를 구축합니다.",
-lp_title:"유동성 풀 비전",
-lp_desc:"초기 유동성 공급자는 거래 수수료 수익을 선점할 수 있습니다."
-},
-en:{
-headline:"Web3 Global Digital Bank",
-sub:"DEX & Liquidity Strategy after Open Mainnet",
-pay:"Pay",
-send:"Send",
-deposit:"Deposit",
-reward:"Reward",
-ubi:"UBI",
-support:"Support",
-total:"Total Balance",
-dex_title:"DEX Strategy",
-dex_desc:"After Open Mainnet, liquidity pools enable swaps, fee revenue, and asset expansion.",
-lp_title:"Liquidity Vision",
-lp_desc:"Early liquidity providers can capture transaction fee revenue."
-}
-};
+let balance=400;
 
-function changeLanguage(){
-const lang=document.getElementById("language").value;
-document.querySelectorAll("[data-key]").forEach(el=>{
-const key=el.getAttribute("data-key");
-if(translations[lang] && translations[lang][key]){
-el.innerText=translations[lang][key];
-}
-});
+function simulateSwap(){
+let amount=parseFloat(document.getElementById("swapAmount").value);
+if(!amount || amount<=0) return;
+let rate=35; 
+let result=amount*rate;
+document.getElementById("swapResult").innerHTML=
+amount+" Pi → "+result.toFixed(2)+" USDT (시뮬레이션)";
+addTx("SWAP",amount);
 }
 
-window.onload=function(){
-const browserLang=navigator.language.substring(0,2);
-if(translations[browserLang]){
-document.getElementById("language").value=browserLang;
-changeLanguage();
+function calculateAPR(){
+let amount=parseFloat(document.getElementById("lpAmount").value);
+let apr=parseFloat(document.getElementById("apr").value);
+if(!amount||!apr)return;
+let yearly=amount*(apr/100);
+document.getElementById("aprResult").innerHTML=
+"예상 연 수익: "+yearly.toFixed(2)+" Pi";
 }
+
+function addTx(type,amount){
+let table=document.getElementById("txTable");
+let row=table.insertRow(0);
+row.insertCell(0).innerText=type;
+row.insertCell(1).innerText=amount+" Pi";
+row.insertCell(2).innerText=new Date().toLocaleTimeString();
+}
+
+function adminLogin(){
+let pass=prompt("관리자 비밀번호 입력");
+if(pass==="1234"){
+document.getElementById("adminPanel").classList.remove("hidden");
+}
+}
+
+function mint(){
+balance+=100;
+document.getElementById("balance").innerText=balance+" Pi";
+addTx("MINT",100);
 }
 </script>
 
